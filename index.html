@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>TodoMVC using RxJs and "eve-concepts"</title>
+
+        <meta charset="utf-8" />
+
+        <link rel="stylesheet" href="node_modules/todomvc-common/base.css" />
+        <link rel="stylesheet" href="node_modules/todomvc-app-css/index.css" />
+    </head>
+    <body>
+
+        <!--
+            Layout
+        -->
+
+        <section class="todoapp">
+            <header class="header">
+                <h1>todos</h1>
+                <input class="new-todo" placeholder="What needs to be done?" autofocus>
+            </header>
+            <section class="main">
+                <input class="toggle-all" type="checkbox">
+                <label for="toggle-all">Mark all as complete</label>
+                <ul class="todo-list"></ul>
+            </section>
+            <footer class="footer">
+                <span class="todo-count"></span>
+                <ul class="filters"></ul>
+                <button class="clear-completed">Clear completed</button>
+            </footer>
+        </section>
+
+
+        <!--
+            Templates
+        -->
+
+        <script type="text/template" id="todo-list-item-template">
+                {{#todos}}
+                    <li class="{{complete ? 'completed' : ''}} todo-item" todo-id="{{id}}">
+                        <div class="view">
+                            <input class="toggle" type="checkbox" checked="{{complete}}" twoway="false">
+                            <label class="todo-item-text">{{text}}</label>
+                            <button class="destroy"></button>
+                        </div>
+                    </li>
+                {{/todos}}
+        </script>
+
+        <script type="text/template" id="filters-template">
+            <li class="filter-button show-all-button">
+                <a href="#" class="{{filter === undefined ? 'selected' : ''}}">All</a>
+            </li>
+            <li class="filter-button show-active-button">
+                <a href="#" class="{{filter.query.complete === false ? 'selected' : ''}}">Active</a>
+            </li>
+            <li class="filter-button show-completed-button">
+                <a href="#" class="{{filter.query.complete === true ? 'selected' : ''}}">Completed</a>
+            </li>
+        </script>
+
+        <script type="text/template" id="todo-count-template">
+                {{count}} item{{count !== 1 ? 's' : ''}} left
+        </script>
+
+
+
+
+        <!--
+            Dependencies
+        -->
+        <script src='node_modules/ractive/ractive.min.js'></script>
+        <script src="node_modules/lodash/lodash.js"></script>
+        <script src="Rx.js"></script> <!-- npm version does not offer a browserified version (?) -->
+        <script src="eve.js"></script>
+
+        <!--
+            App
+        -->
+        <script src="main.js"></script>
+
+    </body>
+</html>
